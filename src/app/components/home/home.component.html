@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="title-wrapper">
+        <h2>
+            רשימת בדיחות
+        </h2>
+        <h4>
+            (ניתן להקליק על בדיחה כדי לצפות בפרטים נוספים)
+        </h4>
+    </div>
+    <table class="table table-striped">
+        <tbody>
+            <tr *ngFor="let joke of distinctedJokes; let i = index" (click)="openJokeDetails(joke, jokeModal)">
+                <td>
+                    {{ i + 1 }}
+                </td>
+                <td class="formatted">
+                    {{ getJoke(joke) }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal -->
+<ng-template #jokeModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">{{ modalDetails.title }}</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <div class="table-wrapper">
+            <table>
+                <tbody>
+                    <tr *ngFor="let prop of jokeDetailsArray">
+                        <td><b>{{ prop.key }}:</b></td>
+                        <td>{{ prop.value }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="more-jokes">
+            <h4>More jokes you may like:</h4>
+            <ol>
+                <li *ngFor="let joke of modalDetails.moreJokes">
+                    {{ getJoke(joke) }}
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>

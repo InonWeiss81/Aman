@@ -1,0 +1,34 @@
+<div class="container">
+    <div id="login-container">
+        <div id="form-container">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <h2>כניסת משתמש</h2>
+                <div class="form-control-wrapper">
+                    <input class="form-control" id="username" type="text" formControlName="username"
+                        [placeholder]="usernamePH">
+                    <div *ngIf="loginForm.invalid && (loginForm.dirty || loginForm.touched) else rowPH" class="my-alert">
+                        <div *ngIf="loginForm.get('username')?.errors?.['required'] else rowPH">
+                            שדה חובה
+                        </div>
+                    </div>
+                </div>
+                <div class="form-control-wrapper">
+                    <input class="form-control" id="password" type="text" formControlName="password"
+                        [placeholder]="passwordPH">
+                    <div *ngIf="loginForm.invalid && (loginForm.dirty || loginForm.touched) else rowPH" class="my-alert">
+                        <div *ngIf="loginForm.get('password')?.errors?.['required'] else rowPH">
+                            שדה חובה
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-wrapper">
+                    <button class="btn btn-primary my-btn" type="submit" [disabled]="!loginForm.valid">כניסה</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<ng-template #rowPH>
+    <br>
+</ng-template>
